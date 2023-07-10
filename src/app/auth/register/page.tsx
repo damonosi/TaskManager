@@ -25,16 +25,16 @@ const RegisterScreen = () => {
   } = useForm();
 
   const submitHandler = async ({
-    name,
+    username,
     email,
     password,
   }: {
-    name: string;
+    username: string;
     email: string;
     password: string;
   }) => {
     try {
-      await axios.post("/api/auth/register", { name, email, password });
+      await axios.post("/api/auth/register", { username, email, password });
       const result = await signIn("credentials", {
         redirect: false,
         email,
@@ -55,10 +55,10 @@ const RegisterScreen = () => {
       >
         <h1 className="mb-4 text-xl">Name</h1>
         <div className="mb-4">
-          <label htmlFor="name">Name</label>
+          <label htmlFor="name">Username</label>
           <input
             type="text"
-            {...register("name", {
+            {...register("username", {
               required: "Please enter name",
               pattern: {
                 value: /^[a-zA-Z0-9_.+-]/i,
@@ -66,11 +66,11 @@ const RegisterScreen = () => {
               },
             })}
             className="w-full"
-            id="name"
+            id="username"
             autoFocus
           ></input>
-          {errors.name && (
-            <div className="text-red-500">{errors.name.message}</div>
+          {errors.username && (
+            <div className="text-red-500">{errors.username.message}</div>
           )}
         </div>
         <div className="mb-4">

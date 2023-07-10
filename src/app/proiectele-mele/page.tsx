@@ -3,14 +3,17 @@ import Proiect from "@/models/Proiect";
 import User from "@/models/User";
 import { authOptions } from "@/utils/auth";
 import db from "@/utils/db";
+import { Session } from "next-auth";
 import { getServerSession } from "next-auth/next";
-async function getProjects(session) {
+import CardProiect from "./CardProiect";
+
+async function getProjects(session: Session | null) {
   const userId = session?.user.id;
   await db.connect();
   const user = await User.findById(userId);
   function getProjectsIds() {
     const getProjectIds = () => {
-      return user.proiecte.map(function (proiectId) {
+      return user.proiecte.map(function (proiectId: string) {
         return proiectId.toString();
       });
     };
@@ -29,24 +32,22 @@ async function getProjects(session) {
 }
 const ProiecteleMele = async () => {
   const session = await getServerSession(authOptions);
-  console.log("sesiune", session?.user.id);
 
   const projects = await getProjects(session);
-  console.log("proiectep", projects);
 
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col items-center py-4 gap-6 text-white min-h-screen">
       <div
-        className="grid grid-cols-4 gap-5"
-        id="proiectele-mele"
+        className="grid grid-cols-2 gap-5 "
+        id="container-proiectele-mele"
       >
-        {projects.map(({ nume }) => (
-          <div
-            className="border-4"
-            id="container-proiect"
-          >
-            <div>{nume}</div>
-          </div>
+        {projects.map(({ nume, id, echipa }) => (
+          <CardProiect
+            echipa={echipa}
+            key={id}
+            nume={nume}
+            id={id}
+          />
         ))}
       </div>
       <div>

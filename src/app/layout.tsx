@@ -18,10 +18,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      {" "}
+      <body className={`${inter.className}  dark:bg-gradient-radial `}>
         <Providers>
           <Header />
-          <main>{children}</main>
+
+          <main className="pt-14">{children}</main>
           <Footer />
         </Providers>
       </body>

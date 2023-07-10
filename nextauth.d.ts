@@ -2,6 +2,10 @@ import { DefaultSession } from "next-auth";
 
 declare module "next-auth" {
   interface Session {
-    user: { id: string; isAdmin: boolean } & DefaultSession["user"];
+    user: {
+      id: string;
+      isAdmin: boolean;
+      username: string;
+    } & DefaultSession["user"];
   }
 }

@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 const proiectSchema = new mongoose.Schema(
   {
     nume: { type: String, required: true },
-    liderEchipa: { type: mongoose.Schema.Types.ObjectId, required: true },
+    liderEchipa: { type: String, required: true },
     echipa: [String],
   },
   {

@@ -3,11 +3,13 @@ import DropdownUser from "./DropdownUser";
 
 export default function Header() {
   return (
-    <header className="w-full border flex  justify-between items-center h-14 border-b-black px-16">
+    <header className="w-full dark:bg-[#003249] fixed flex z-40 justify-between items-center h-14  px-16">
       <Link href="/">
-        <h1>Task Manager</h1>
+        <h1 className="text-[#89998A]">Task Manager</h1>
       </Link>{" "}
-      <DropdownUser />
+      <div className="flex gap-4">
+        <DropdownUser />
+      </div>
     </header>
   );
 }

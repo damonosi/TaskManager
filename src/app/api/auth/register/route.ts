@@ -4,15 +4,15 @@ import bcrypt from "bcrypt";
 import { NextResponse } from "next/server";
 
 interface RequestBody {
-  name: string;
+  username: string;
   email: string;
   password: string;
 }
 export async function POST(req: Request) {
   const body: RequestBody = await req.json();
-  const { name, email, password } = body;
+  const { username, email, password } = body;
   if (
-    !name ||
+    !username ||
     !email ||
     !email.includes("@") ||
     !password ||
@@ -29,13 +29,23 @@ export async function POST(req: Request) {
   }
   await db.connect();
   const existingUser = await User.findOne({ email: email });
-
-  if (existingUser) {
-    console.log("user exists");
+  const existingUsername = await User.findOne({ username: username });
+  if (existingUsername) {
     await db.disconnect();
     return NextResponse.json(
       {
-        message: "User exists already",
+        message: "Username is taken",
+      },
+      {
+        status: 422,
+      },
+    );
+  }
+  if (existingUser) {
+    await db.disconnect();
+    return NextResponse.json(
+      {
+        message: "Email is already used",
       },
       {
         status: 422,
@@ -43,7 +53,7 @@ export async function POST(req: Request) {
     );
   }
   const newUser = new User({
-    name,
+    username,
     email,
     password: await bcrypt.hash(password, 10),
     isAdmin: false,

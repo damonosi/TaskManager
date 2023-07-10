@@ -36,7 +36,7 @@ export const authOptions: NextAuthOptions = {
         }
         return {
           id: user._id,
-          name: user.name,
+          username: user.username,
           email: user.email,
           image: "f",
           isAdmin: user.isAdmin,
@@ -51,6 +51,7 @@ export const authOptions: NextAuthOptions = {
         user: {
           ...session.user,
           id: token.id,
+          username: token.username,
           isAdmin: token.isAdmin,
         },
       };
@@ -62,6 +63,7 @@ export const authOptions: NextAuthOptions = {
           ...token,
           id: u.id,
           isAdmin: u.isAdmin,
+          username: u.username,
         };
       }
       return token;
@@ -71,3 +73,4 @@ export const authOptions: NextAuthOptions = {
 
 const handler = NextAuth(authOptions);
 export { handler as GET, handler as POST };
+

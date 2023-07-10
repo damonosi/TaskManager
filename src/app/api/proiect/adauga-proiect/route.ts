@@ -31,7 +31,7 @@ export async function POST(req: Request) {
   if (session) {
     await db.connect();
     const newProject = new Proiect({
-      liderEchipa: session?.user?.id,
+      liderEchipa: session?.user?.username,
       nume,
       echipa,
     });

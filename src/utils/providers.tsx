@@ -21,12 +21,20 @@ const Providers = ({ children }: IProviders) => {
 
   return (
     <SWRConfig value={{ fetcher: myFetcher }}>
-      <ToastContainer
-        containerId="toast"
-        enableMultiContainer={true}
-      />
-
       <SessionProvider>
+        <ToastContainer
+          theme="light"
+          position="top-center"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
+
         {mounted ? (
           <ThemeProvider attribute="class">{children} </ThemeProvider>
         ) : (

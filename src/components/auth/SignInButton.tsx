@@ -4,7 +4,7 @@ const SignInButton = async () => {
   return (
     <button
       className="text-green-600"
-      onClick={() => signIn("credentials", { callbackUrl: "/proiectele-mele" })}
+      onClick={() => signIn("credentials", { callbackUrl: "/my-projects" })}
     >
       Sign In
     </button>

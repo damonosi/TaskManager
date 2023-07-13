@@ -6,20 +6,21 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 
 type Inputs = {
-  nume: string;
-  echipa: string[];
+  name: string;
+  team: string[];
 };
 
-const AdaugaProiect = () => {
+const AddProject = () => {
   const {
     register,
     handleSubmit,
     unregister,
     formState: { errors },
   } = useForm<Inputs>();
-  const onSubmit: SubmitHandler<Inputs> = async ({ nume, echipa }) => {
+  const onSubmit: SubmitHandler<Inputs> = async ({ name, team }) => {
     try {
-      await axios.post("/api/proiect/adauga-proiect", { nume, echipa });
+      await axios.post("/api/project/add-project", { name, team });
+      toast.success("Project added !");
     } catch (err) {
       toast.error(getError(err));
     }
@@ -35,13 +36,13 @@ const AdaugaProiect = () => {
       >
         <input
           type="text"
-          placeholder="nume proiect"
+          placeholder="Project Name"
           className="text-black"
-          {...register("nume", { required: true })}
+          {...register("name", { required: true })}
         />
         <div
           className=""
-          id="adauga-echipa"
+          id="add-team"
         >
           {" "}
           <section className="flex gap-4">
@@ -67,12 +68,12 @@ const AdaugaProiect = () => {
                   type="text"
                   placeholder={`teamMember ${index}`}
                   className="text-black w-fit"
-                  {...register(`echipa.${index}`, { required: true })}
+                  {...register(`team.${index}`, { required: true })}
                 />
                 <button
                   type="button"
                   onClick={() => {
-                    unregister(`echipa.${index}`);
+                    unregister(`team.${index}`);
                     setTeamNumber(teamNumber - 1);
                   }}
                 >
@@ -88,4 +89,4 @@ const AdaugaProiect = () => {
   );
 };
 
-export default AdaugaProiect;
+export default AddProject;

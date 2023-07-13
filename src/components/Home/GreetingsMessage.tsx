@@ -23,7 +23,7 @@ const GreetingsMessage = () => {
         transition={spring}
         className="text-start text-5xl"
       >
-        Bine ai venit in managerul tau de proiecte !{" "}
+        Welcome to your project manager !
       </motion.h2>
     </div>
   );

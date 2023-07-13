@@ -11,8 +11,8 @@ const MenuUser = ({ open }: { open: boolean }) => {
           id="menuUser"
         >
           <ThemeButton />
-          <Link href="/proiectele-mele">Proiecte</Link>
-          <Link href="/adauga-proiect">adauga proiect nou</Link>
+          <Link href="/my-projects">Projects</Link>
+          <Link href="/add-project">Add new project</Link>
 
           <SignOutButton />
         </div>

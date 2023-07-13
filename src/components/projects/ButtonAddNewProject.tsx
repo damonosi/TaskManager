@@ -1,16 +1,16 @@
 "use client";
 import { useRouter } from "next/navigation";
 
-const NavigareAdaugaProiect = () => {
+const ButtonAddNewProject = () => {
   const router = useRouter();
   return (
     <button
       className="border px-4 py-2"
-      onClick={() => router.push("/adauga-proiect")}
+      onClick={() => router.push("/add-project")}
     >
-      Adauga Proiect Nou
+      Add new project
     </button>
   );
 };
 
-export default NavigareAdaugaProiect;
+export default ButtonAddNewProject;
